@@ -1,4 +1,3 @@
-
 // Three.js variables
 let scene, camera, renderer, controls, currentMesh, font;
 const objects = [];
@@ -32,7 +31,7 @@ function init3DScene() {
         camera.position.y = 3;
         
         // Create renderer
-        renderer = new THREE.WebGLRenderer({
+        renderer = new THREE.WebGLRenderer({ 
             antialias: true,
             alpha: true,
             powerPreference: "high-performance"
@@ -80,7 +79,7 @@ function init3DScene() {
         
         // Load font for text
         const fontLoader = new THREE.FontLoader();
-        fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json',
+        fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', 
             (loadedFont) => {
                 font = loadedFont;
                 console.log('Font loaded successfully');
@@ -194,7 +193,7 @@ function createText3D(text) {
             textGeometry.computeBoundingBox();
             textGeometry.center();
             
-            const material = new THREE.MeshPhongMaterial({
+            const material = new THREE.MeshPhongMaterial({ 
                 color: new THREE.Color(color),
                 shininess: 100,
                 specular: 0x222222
@@ -306,7 +305,7 @@ function createHeightmapFromImage(imageSrc) {
     try {
         const textureLoader = new THREE.TextureLoader();
         
-        textureLoader.load(imageSrc,
+        textureLoader.load(imageSrc, 
             (texture) => {
                 // Remove previous mesh
                 if (currentMesh) {
@@ -456,19 +455,19 @@ function createShape(type) {
             
             switch(materialType) {
                 case 'phong':
-                    material = new THREE.MeshPhongMaterial({
+                    material = new THREE.MeshPhongMaterial({ 
                         color: new THREE.Color(color),
                         shininess: 100,
                         specular: 0x111111
                     });
                     break;
                 case 'lambert':
-                    material = new THREE.MeshLambertMaterial({
+                    material = new THREE.MeshLambertMaterial({ 
                         color: new THREE.Color(color)
                     });
                     break;
                 case 'basic':
-                    material = new THREE.MeshBasicMaterial({
+                    material = new THREE.MeshBasicMaterial({ 
                         color: new THREE.Color(color)
                     });
                     break;
@@ -534,18 +533,18 @@ function changeMaterial() {
             let newMaterial;
             switch(materialType) {
                 case 'phong':
-                    newMaterial = new THREE.MeshPhongMaterial({
+                    newMaterial = new THREE.MeshPhongMaterial({ 
                         color: new THREE.Color(color),
                         shininess: 100
                     });
                     break;
                 case 'lambert':
-                    newMaterial = new THREE.MeshLambertMaterial({
+                    newMaterial = new THREE.MeshLambertMaterial({ 
                         color: new THREE.Color(color)
                     });
                     break;
                 case 'basic':
-                    newMaterial = new THREE.MeshBasicMaterial({
+                    newMaterial = new THREE.MeshBasicMaterial({ 
                         color: new THREE.Color(color)
                     });
                     break;
@@ -635,7 +634,7 @@ function exportGLB() {
     setTimeout(() => {
         try {
             const exporter = new THREE.GLTFExporter();
-            exporter.parse(currentMesh,
+            exporter.parse(currentMesh, 
                 (glb) => {
                     try {
                         const blob = new Blob([glb], { type: 'model/gltf-binary' });
@@ -657,7 +656,7 @@ function exportGLB() {
                         hideLoading();
                         showNotification('Failed to create download', 'error');
                     }
-                },
+                }, 
                 { binary: true },
                 (error) => {
                     console.error('Error exporting GLB:', error);
@@ -832,8 +831,8 @@ function animate() {
     if (controls) {
         controls.update();
     }
+
     
-    // Add subtle animation to current mesh
     if (currentMesh) {
         currentMesh.rotation.y += 0.002;
     }
@@ -843,27 +842,27 @@ function animate() {
     }
 }
 
-// Initialize when DOM is loaded
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, initializing 3D scene...');
     
-    // Initialize UI values first
+
     updateSliderValues();
     
-    // Check for shared model in URL
+
     const urlParams = new URLSearchParams(window.location.search);
     const modelData = urlParams.get('model');
     
-    // Initialize 3D scene with a small delay to ensure DOM is ready
+   
     setTimeout(() => {
         init3DScene();
         
-        // If there's shared model data, apply it after initialization
+        
         if (modelData) {
             setTimeout(() => {
                 try {
                     const data = JSON.parse(atob(modelData));
-                    // Apply shared model settings
+                   
                     const colorPicker = document.getElementById('customColor');
                     const widthSlider = document.getElementById('widthSlider');
                     const heightSlider = document.getElementById('heightSlider');
@@ -889,7 +888,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100);
 });
 
-// File upload area interactivity
+
 document.addEventListener('DOMContentLoaded', () => {
     const fileUploadArea = document.getElementById('fileUploadArea');
     if (fileUploadArea) {
@@ -922,14 +921,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }, false);
     }
     
-    // Initialize tooltips
+ 
     document.querySelectorAll('[title]').forEach(el => {
         el.classList.add('tooltip');
         el.setAttribute('data-tooltip', el.getAttribute('title'));
     });
 });
 
-// Add missing helper functions
+
 function clearScene() {
     if (currentMesh) {
         scene.remove(currentMesh);
@@ -960,7 +959,7 @@ function toggleGrid() {
     showNotification('Grid toggle coming soon!', 'info');
 }
 
-// Export functions to window for HTML onclick handlers
+
 window.createShape = createShape;
 window.createText3D = createText3D;
 window.generateFromText = generateFromText;
