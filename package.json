@@ -1,0 +1,30 @@
+{
+  "name": "glbcraft-wizardry",
+  "version": "1.0.0",
+  "description": "A magical 3D model creation tool with text-to-3D and image-to-3D capabilities",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'No build step required for static site'",
+    "deploy": "wrangler pages deploy . --project-name=glbcraft-wizardry",
+    "deploy:production": "wrangler pages deploy . --project-name=glbcraft-wizardry --branch=main",
+    "deploy:preview": "wrangler pages deploy . --project-name=glbcraft-wizardry --branch=preview",
+    "preview": "wrangler pages dev ."
+  },
+  "keywords": [
+    "3d",
+    "webgl",
+    "threejs",
+    "glb",
+    "modeling",
+    "creative-tools"
+  ],
+  "author": "GlbCraft Team",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
